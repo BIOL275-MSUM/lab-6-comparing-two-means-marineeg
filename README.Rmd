@@ -23,7 +23,8 @@ For each question below, write a sentence answering the question and show the co
 
 > Test the hypothesis that the tributaries have no effect on the number of species of electric fish.
 
-```library(tidyverse)
+```{r}
+library(tidyverse)
 
 fish <- read_csv(file ="chap12q19ElectricFish.csv")
 
@@ -35,8 +36,9 @@ electric_fish <-
   print()
 
 t.test(species ~ location, data = electric_fish)
-
 ```
+
+
 
 
 ### Question B
@@ -50,7 +52,7 @@ The 95% confidence interval is -4.587031  8.253697
 
 > State the assumptions that you had to make to complete parts (A) and (B). Create a graph to assess whether one of those assumptions was met.
 
-```
+```{r}
 electric_fish %>%
   ggplot(aes(x = species)) +
   geom_histogram(aes(fill = location),
@@ -59,8 +61,8 @@ electric_fish %>%
                  position = "identity") +
   scale_fill_manual(values = c("darkorange", "cyan4")) +
   theme_minimal()
-
 ```
+
 
 P is greater than alpha so we do not reject the null, we accept the alternative: there is no significant difference in the species counts.
 
@@ -78,18 +80,19 @@ They measured the body temperature of crabs every 10 minutes for 1.5 hours. Thes
 
 > Graph the distribution of body temperatures for each crab type:
 
-```
+```{r}
 ggplot(crabs, aes(x=crabType, y = bodyTemperature)) +
   geom_point(size = 2, color = "red") +
   geom_smooth (method = lm)
-
 ```
+
+
 
 ### Question E
 
 > Does body temperature vary among crab types? State the null and alternative hypothesis, conduct and ANOVA, and interpret the results.
 
-```
+```{r}
 aov_crabs <-
   aov(bodyTemperature ~ crabType, data = crabs)
 aov_crabs
@@ -97,5 +100,7 @@ aov_crabs
 summary(aov_crabs)
 ```
 
+
 The null hypothesis would be that the temperature does not vary between crab type.
 The alternative hypothesis would be that the temperature does vary  
+The P value is lower than 0.05 so we reject the null hypothesis. 
